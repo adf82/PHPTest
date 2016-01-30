@@ -8,6 +8,8 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('PHPTestBundle:full:index.html.twig');
+        return $this->render(
+            'PHPTestBundle:full:index.html.twig'
+        );
     }
 }

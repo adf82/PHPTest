@@ -14,9 +14,16 @@
             <h1>Create a new product</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="columns small-12">
-            {{ form_start(form) }}
+    {% if success %}
+        <div class="row">
+            <div class="small-12 columns">
+                <h2><i class="fa fa-plus-square-o"></i> Product added</h2>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="columns small-12">
+                {{ form_start(form) }}
                 {{ form_errors(form) }}
 
                 <div class="row">
@@ -73,8 +80,9 @@
                     </div>
                 </div>
 
-            {{ form_end(form) }}
+                {{ form_end(form) }}
+            </div>
         </div>
-    </div>
+    {% endif %}
 
 {% endblock %}

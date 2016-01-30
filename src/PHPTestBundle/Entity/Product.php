@@ -157,6 +157,18 @@ class Product implements Taggable
     }
 
     /**
+     * Set tags
+     *
+     * @param string $tags
+     *
+     * @return Product
+     */
+    public function setTags($tags)
+    {
+        return $this;
+    }
+
+    /**
      * Get tags
      *
      * @return string

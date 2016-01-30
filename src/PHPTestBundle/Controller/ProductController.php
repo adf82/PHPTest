@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends Controller
 {
     public function createAction(Request $request){
+        $em = $this->getDoctrine()->getEntityManager();
+        $tagManager = $this->get('fpn_tag.tag_manager');
 
         $product = new Product();
 
@@ -47,7 +49,8 @@ class ProductController extends Controller
                 'tags',
                 TextType::class,
                 array(
-                    'label' => "Tags (Please use comma or space to separate tags)"
+                    'label' => "Tags (Please use the comma to separate tags)",
+                    'required' => true
                 )
             )
             ->add(
@@ -61,16 +64,28 @@ class ProductController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            echo "VALIDA";
-            die;
-            //return $this->redirectToRoute('task_success');
+        //TODO: custom check on tags
+        $tags = $form->get('tags')->getData();
+        $tags = !is_null($tags) ? explode(',', $tags) : null;
+
+        if ($form->isSubmitted() && $form->isValid() && $tags) {
+            foreach($tags as $tag){
+                $singleTag = $tagManager->loadOrCreateTag(trim($tag));
+                $tagManager->addTag($singleTag, $product);
+            }
+
+            $em->persist($product);
+            $em->flush();
+
+            $tagManager->saveTagging($product);
+            $success = true;
         }
 
         return $this->render(
             'PHPTestBundle:full:create.html.twig',
             array(
-                'form' => $form->createView(),
+                'success' => isset($success) ? true : false,
+                'form' => $form->createView()
             )
         );
     }

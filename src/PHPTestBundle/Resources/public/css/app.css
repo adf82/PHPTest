@@ -6,6 +6,11 @@ h1{
     text-transform: uppercase;
     color: #05668D;
 }
+h2{
+    font-family: Helvetica;
+    text-transform: uppercase;
+    color: #02C39A;
+}
 a{
     color: #00A896;
 }

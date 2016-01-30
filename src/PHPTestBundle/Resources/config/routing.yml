@@ -1,3 +1,7 @@
 php_test_homepage:
     path:     /
     defaults: { _controller: PHPTestBundle:Main:index }
+
+php_test_product_create:
+    path:     /product/create
+    defaults: { _controller: PHPTestBundle:Product:create }

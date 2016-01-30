@@ -68,3 +68,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fpn_tag:
+    model:
+        tag_class:     PHPTestBundle\Entity\Tag
+        tagging_class: PHPTestBundle\Entity\Tagging

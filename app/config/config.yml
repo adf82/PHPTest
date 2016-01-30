@@ -73,3 +73,10 @@ fpn_tag:
     model:
         tag_class:     PHPTestBundle\Entity\Tag
         tagging_class: PHPTestBundle\Entity\Tagging
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        product_image:
+            uri_prefix:         /images
+            upload_destination: %kernel.root_dir%/../web/images

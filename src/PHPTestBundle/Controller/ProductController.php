@@ -31,7 +31,7 @@ class ProductController extends Controller
                 TextType::class
             )
             ->add(
-                'image',
+                'imageFile',
                 FileType::class,
                 array(
                     'label' => 'Select an image',

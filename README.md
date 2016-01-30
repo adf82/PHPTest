@@ -7,5 +7,7 @@
 # Installation
 
 * Clone the repository
-* `cd PHPTest` and run `SYMFONY_ENV=dev php composer.phar install --prefer-dist`
 * Setup the VHost following the template in `doc/apache/VHost.conf`
+* Setup proper write permission on `var` (maybe using ACL if supported by your OS)
+* `cd PHPTest` and run `SYMFONY_ENV=dev php composer.phar install --prefer-dist --no-dev`
+* Point your browser to `http://phptest.local`

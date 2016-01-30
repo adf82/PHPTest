@@ -1,0 +1,3 @@
+php_test_homepage:
+    path:     /
+    defaults: { _controller: PHPTestBundle:Main:index }

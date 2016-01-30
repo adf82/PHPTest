@@ -2,7 +2,9 @@
 
 namespace PHPTestBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use DoctrineExtensions\Taggable\Taggable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -11,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="PHPTestBundle\Repository\ProductRepository")
  */
-class Product
+class Product implements Taggable
 {
     /**
      * @var int
@@ -57,9 +59,16 @@ class Product
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="insert_date", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    private $insertDate;
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
 
 
     /**
@@ -145,51 +154,65 @@ class Product
     }
 
     /**
-     * Set tags
-     *
-     * @param string $tags
-     *
-     * @return Product
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
-
-    /**
      * Get tags
      *
      * @return string
      */
     public function getTags()
     {
+        $this->tags = $this->tags ?: new ArrayCollection();
+
         return $this->tags;
     }
 
+    public function getTaggableType()
+    {
+        return 'tag';
+    }
+
+    public function getTaggableId()
+    {
+        return $this->getId();
+    }
+
     /**
-     * Set insertDate
+     * Set createdAt
      *
-     * @param \DateTime $insertDate
+     * @param \DateTime $createdAt
      *
      * @return Product
      */
-    public function setInsertDate($insertDate)
+    public function setCreatedAt($createdAt)
     {
-        $this->insertDate = $insertDate;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get insertDate
+     * Get createdAt
      *
      * @return \DateTime
      */
-    public function getInsertDate()
+    public function getCreatedAt()
     {
-        return $this->insertDate;
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
 

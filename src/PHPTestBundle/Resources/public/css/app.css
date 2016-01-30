@@ -1,0 +1,18 @@
+body{
+    background-color: #eee;
+}
+h1{
+    font-family: Helvetica;
+    text-transform: uppercase;
+    color: #05668D;
+}
+a{
+    color: #00A896;
+}
+a:hover{
+    color: #02C39A;
+}
+
+li{
+    list-style-type: none;
+}

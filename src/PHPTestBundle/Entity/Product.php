@@ -3,6 +3,7 @@
 namespace PHPTestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -25,6 +26,8 @@ class Product
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -46,6 +49,8 @@ class Product
      * @var string
      *
      * @ORM\Column(name="tags", type="string", length=1024)
+     *
+     * @Assert\NotBlank()
      */
     private $tags;
 

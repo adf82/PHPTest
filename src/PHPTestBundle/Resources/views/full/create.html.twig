@@ -15,7 +15,66 @@
         </div>
     </div>
     <div class="row">
+        <div class="columns small-12">
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
 
+                <div class="row">
+                    <div class="columns small-12">
+                        {{ form_label(form.name) }}
+                        <div class="row">
+                            <div class="columns small-12 error">
+                                {{ form_errors(form.name) }}
+                            </div>
+                        </div>
+                        {{ form_widget(form.name) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="columns small-12">
+                        {{ form_label(form.image, null, {'label_attr': {'class': 'button'} }) }}
+                        <div class="row">
+                            <div class="columns small-12 error">
+                                {{ form_errors(form.image) }}
+                            </div>
+                        </div>
+                        {{ form_widget(form.image, {'attr': {'class': 'show-for-sr'} }) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="columns small-12">
+                        {{ form_label(form.description) }}
+                        <div class="row">
+                            <div class="columns small-12 error">
+                                {{ form_errors(form.description) }}
+                            </div>
+                        </div>
+                        {{ form_widget(form.description) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="columns small-12">
+                        {{ form_label(form.tags) }}
+                        <div class="row">
+                            <div class="columns small-12 error">
+                                {{ form_errors(form.tags) }}
+                            </div>
+                        </div>
+                        {{ form_widget(form.tags) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="columns small-6">
+                        {{ form_widget(form.save, {'attr': {'class': 'button'}} ) }}
+                    </div>
+                </div>
+
+            {{ form_end(form) }}
+        </div>
     </div>
 
 {% endblock %}

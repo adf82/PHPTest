@@ -16,3 +16,7 @@ a:hover{
 li{
     list-style-type: none;
 }
+
+.error{
+    color: red;
+}

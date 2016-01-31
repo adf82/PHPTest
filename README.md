@@ -13,7 +13,8 @@
 * `cd PHPTest` and run `SYMFONY_ENV=dev php composer.phar install --prefer-dist --no-dev`
 * Point your browser to `http://phptest.local`
 
-# Implementation choices
+# Implementation choices and notes
 
 * For a better experience a pagination in `/product/list` should have been implemented, I decided to avoid it for time constraint. Pagination can be implemented using `Pagerfanta`
+* A `ProductService` has been built to better support the search logic, avoiding the injection of the TaggingRepository into the ProductRepository (This has been considered as a bad practice)
  

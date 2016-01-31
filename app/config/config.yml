@@ -93,5 +93,6 @@ liip_imagine:
         product_thumb:
             quality: 75
             filters:
+                auto_rotate: ~
                 strip: ~
                 thumbnail: { size: [120, 90], mode: outbound }

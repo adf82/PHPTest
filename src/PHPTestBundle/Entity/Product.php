@@ -7,12 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 use DoctrineExtensions\Taggable\Taggable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping\PrePersist;
-use Doctrine\ORM\Mapping\PreUpdate;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Product
+ * Product.
  *
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="PHPTestBundle\Repository\ProductRepository")
@@ -85,9 +83,8 @@ class Product implements Taggable
      */
     private $updatedAt;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -97,7 +94,7 @@ class Product implements Taggable
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -111,7 +108,7 @@ class Product implements Taggable
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -173,7 +170,7 @@ class Product implements Taggable
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -187,7 +184,7 @@ class Product implements Taggable
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -197,7 +194,7 @@ class Product implements Taggable
     }
 
     /**
-     * Set tags
+     * Set tags.
      *
      * @param string $tags
      *
@@ -209,7 +206,7 @@ class Product implements Taggable
     }
 
     /**
-     * Get tags
+     * Get tags.
      *
      * @return string
      */
@@ -231,7 +228,7 @@ class Product implements Taggable
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -245,7 +242,7 @@ class Product implements Taggable
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -271,7 +268,6 @@ class Product implements Taggable
     }
 
     /**
-     *
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
@@ -284,4 +280,3 @@ class Product implements Taggable
         }
     }
 }
-

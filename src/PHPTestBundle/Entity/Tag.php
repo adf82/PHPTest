@@ -3,16 +3,15 @@
  * Created by PhpStorm.
  * User: Gabriele Perego
  * Date: 30/01/16
- * Time: 18:22
+ * Time: 18:22.
  */
-
 namespace PHPTestBundle\Entity;
 
 use FPN\TagBundle\Entity\Tag as BaseTag;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tag
+ * Tag.
  *
  * @ORM\Table(name="tag")
  * @ORM\Entity

@@ -14,7 +14,7 @@ class ProductType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -28,41 +28,41 @@ class ProductType extends AbstractType
                 FileType::class,
                 array(
                     'label' => 'Select an image',
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
                 'description',
                 TextareaType::class,
                 array(
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
                 'tags',
                 TextType::class,
                 array(
-                    'label' => "Tags (Please use the comma to separate tags)",
-                    'required' => true
+                    'label' => 'Tags (Please use the comma to separate tags)',
+                    'required' => true,
                 )
             )
             ->add(
                 'save',
                 SubmitType::class,
                 array(
-                    'label' => 'Add'
+                    'label' => 'Add',
                 )
             )
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'PHPTestBundle\Entity\Product'
+            'data_class' => 'PHPTestBundle\Entity\Product',
         ));
     }
 }

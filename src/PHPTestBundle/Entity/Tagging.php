@@ -3,17 +3,16 @@
  * Created by PhpStorm.
  * User: Gabriele Perego
  * Date: 30/01/16
- * Time: 18:23
+ * Time: 18:23.
  */
-
 namespace PHPTestBundle\Entity;
 
-use \FPN\TagBundle\Entity\Tagging as BaseTagging;
+use FPN\TagBundle\Entity\Tagging as BaseTagging;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * Tagging
+ * Tagging.
  *
  * @ORM\Table(uniqueConstraints={@UniqueConstraint(name="tagging_idx", columns={"tag_id", "resource_type", "resource_id"})})
  * @ORM\Entity
@@ -21,7 +20,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 class Tagging extends BaseTagging
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

@@ -10,7 +10,7 @@
 * Setup the VHost following the template in `doc/apache/VHost.conf`
 * Set the proper write permission on `var` (maybe using ACL if supported by your OS)
 * Set the proper permission (they must be writable by the webserver) on `web/images` and `web/cache`
-* `cd PHPTest` and run `SYMFONY_ENV=dev php composer.phar install --prefer-dist --no-dev`
+* `cd PHPTest` and run `SYMFONY_ENV=prod php composer.phar install --prefer-dist --no-dev`
 * Point your browser to `http://phptest.local`
 
 # Implementation choices and notes

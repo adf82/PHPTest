@@ -7,25 +7,29 @@
  */
 namespace PHPTestBundle\Controller;
 
+use FPN\TagBundle\Entity\TagManager;
 use PHPTestBundle\Entity\Product;
+use PHPTestBundle\Repository\ProductRepository;
+use PHPTestBundle\Service\ProductService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ProductController
- * @package PHPTestBundle\Controller
+ * Class ProductController.
  */
 class ProductController extends Controller
 {
     /**
-     * Product create controller
+     * Product create controller.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
+        /** @var TagManager $tagManager */
         $tagManager = $this->get('fpn_tag.tag_manager');
 
         $product = new Product();
@@ -34,7 +38,7 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         $tags = $form->get('tags')->getData();
-        $tags = !is_null($tags) ? explode(',', $tags) : null;
+        $tags = !is_null($tags) ? $tagManager->splitTagNames($tags) : null;
 
         if ($form->isSubmitted() && $form->isValid() && $tags) {
             foreach ($tags as $tag) {
@@ -60,13 +64,23 @@ class ProductController extends Controller
 
     public function listAction(Request $request)
     {
+        /** @var ProductService $productService */
+        $productService = $this->get('php_test.product');
+
+        /** @var ProductRepository $repository */
         $repository = $this->getDoctrine()->getRepository('PHPTestBundle:Product');
-        $products = $repository->findAll();
+
+        $query = $request->get('query');
+        if (is_null($query)) {
+            $products = $productService->findAllProductsByInsertDate('ASC');
+        } else {
+            $products = $productService->findAllByTag($query);
+        }
 
         return $this->render(
             'PHPTestBundle:full:list.html.twig',
             array(
-                'products' => $products
+                'products' => $products,
              )
         );
     }

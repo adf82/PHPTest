@@ -10,12 +10,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="small-12 columns">
+        <div class="small-12 medium-10 columns">
             <h1>Products list</h1>
         </div>
     </div>
     <div class="row">
-        <div class="small-12 columns">
+        <div class="small-12 medium-9 columns">
             <div class="row small-up-1 medium-up-2 large-up-4">
                 {% for product in products %}
                     <div class="column">
@@ -28,6 +28,27 @@
                     </div>
                 {% endfor %}
             </div>
+        </div>
+        <div class="columns small-12 medium-3">
+            <h3>Search</h3>
+            {% if app.request.get('query') is not null %}
+                <div class="row">
+                    <div class="columns small-12">
+                        <a href="{{ path('php_test_product_list') }}" class="secondary button">reset search</a>
+                    </div>
+                </div>
+
+            {% endif %}
+            <form method="get" action="">
+                <div class="row">
+                    <div class="columns small-12 medium-8">
+                        <input type="text" placeholder="Search by tag" name="query"/>
+                    </div>
+                    <div class="columns small-12 medium-4">
+                        <button class="button">Search</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

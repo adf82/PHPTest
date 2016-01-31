@@ -31,26 +31,23 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var TagManager $tagManager */
         $tagManager = $this->get('fpn_tag.tag_manager');
+        /** @var ProductService $productService */
+        $productService = $this->get('php_test.product');
 
         $product = new Product();
         $form = $this->createForm('PHPTestBundle\Form\ProductType', $product);
 
         $form->handleRequest($request);
-
         $tags = $form->get('tags')->getData();
-        $tags = !is_null($tags) ? $tagManager->splitTagNames($tags) : null;
 
-        if ($form->isSubmitted() && $form->isValid() && $tags) {
-            foreach ($tags as $tag) {
-                $singleTag = $tagManager->loadOrCreateTag(trim($tag));
-                $tagManager->addTag($singleTag, $product);
+        if ($form->isSubmitted() && $form->isValid() && count($tags) > 0) {
+            $productService->addProduct($product, $tags);
+            if($product instanceof Product){
+                return $this->redirectToRoute('php_test_product_list');
+            }else{
+                throw new \Exception("Error creating product");
             }
 
-            $em->persist($product);
-            $em->flush();
-
-            $tagManager->saveTagging($product);
-            $success = true;
         }
 
         return $this->render(
@@ -73,9 +70,6 @@ class ProductController extends Controller
     {
         /** @var ProductService $productService */
         $productService = $this->get('php_test.product');
-
-        /** @var ProductRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('PHPTestBundle:Product');
 
         $query = $request->get('query');
         if (is_null($query)) {
@@ -103,11 +97,10 @@ class ProductController extends Controller
     public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
-        /** @var ProductService $productService */
-        $productService = $this->get('php_test.product');
         /** @var TagManager $tagManager */
         $tagManager = $this->get('fpn_tag.tag_manager');
+        /** @var ProductService $productService */
+        $productService = $this->get('php_test.product');
 
         /** @var Product $product */
         $product = $productService->findById($id);
@@ -116,21 +109,16 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         $tags = $form->get('tags')->getData();
-        $tags = !is_null($tags) ? $tagManager->splitTagNames($tags) : null;
 
-        if ($form->isSubmitted() && $form->isValid() && $tags) {
-            $product->removeTags();
-            foreach ($tags as $tag) {
-                $singleTag = $tagManager->loadOrCreateTag(trim($tag));
-                $tagManager->addTag($singleTag, $product);
+
+        if ($form->isSubmitted() && $form->isValid() && count($tags) > 0) {
+            $productService->editProduct($product, $tags);
+
+            if($product instanceof Product){
+                return $this->redirectToRoute('php_test_product_list');
+            }else{
+                throw new \Exception("Error updating product with id ".$id);
             }
-
-            $em->persist($product);
-            $em->flush();
-
-            $tagManager->saveTagging($product);
-
-            return $this->redirectToRoute('php_test_product_list');
         }
 
         return $this->render(

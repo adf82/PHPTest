@@ -71,6 +71,31 @@ class ProductService
     }
 
     /**
+     * Add a new product
+     *
+     * @param Product $product
+     * @param $tags
+     * @return Product
+     */
+    public function addProduct(Product $product, $tags)
+    {
+        return $this->persistProduct($product, $tags);
+    }
+
+    /**
+     * Edit a product
+     *
+     * @param Product $product
+     * @param $tags
+     * @return Product
+     */
+    public function editProduct(Product $product, $tags)
+    {
+        $product->removeTags();
+        return $this->persistProduct($product, $tags);
+    }
+
+    /**
      * Return all product by Insert date.
      *
      * @param $sort
@@ -126,8 +151,6 @@ class ProductService
             ->setParameter('id', $product->getTaggableId())
             ->setParameter('type', $product->getTaggableType())
 
-            // ->orderBy('t.name', 'ASC')
-
             ->getQuery()
             ->getResult()
         ;
@@ -153,5 +176,20 @@ class ProductService
         );
 
         return $product->getName();
+    }
+
+    private function persistProduct(Product $product, $tags)
+    {
+        $tags = $this->tagManager->splitTagNames($tags);
+        foreach ($tags as $tag) {
+            $singleTag = $this->tagManager->loadOrCreateTag(trim($tag));
+            $this->tagManager->addTag($singleTag, $product);
+        }
+
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
+
+        $this->tagManager->saveTagging($product);
+        return $product;
     }
 }

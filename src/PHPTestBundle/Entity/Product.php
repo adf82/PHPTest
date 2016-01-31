@@ -63,7 +63,7 @@ class Product implements Taggable
     /**
      * @var string
      *
-     * @ORM\Column(name="tags", type="string", length=1024)
+     * @ORM\Column(name="tags")
      *
      * @Assert\NotBlank()
      */
@@ -82,6 +82,11 @@ class Product implements Taggable
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -206,9 +211,23 @@ class Product implements Taggable
     }
 
     /**
+     * Set tags as strings to edit.
+     *
+     * @param string $tags
+     *
+     * @return Product
+     */
+    public function setTagsAsString($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
      * Get tags.
      *
-     * @return string
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getTags()
     {
@@ -217,11 +236,28 @@ class Product implements Taggable
         return $this->tags;
     }
 
+    /**
+     * Remove tags.
+     **.
+     *
+     * @return Product
+     */
+    public function removeTags()
+    {
+        return $this->tags = null;
+    }
+
+    /**
+     * @return string
+     */
     public function getTaggableType()
     {
         return 'tag';
     }
 
+    /**
+     * @return int
+     */
     public function getTaggableId()
     {
         return $this->getId();

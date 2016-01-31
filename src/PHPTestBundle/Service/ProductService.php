@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManager;
 use DoctrineExtensions\Taggable\TagManager;
 use PHPTestBundle\Entity\Product;
 use PHPTestBundle\Repository\ProductRepository;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * Class ProductService.
@@ -101,9 +102,45 @@ class ProductService
     }
 
     /**
-     * Return product name by id
+     * Return product by id.
      *
      * @param $id
+     *
+     * @return string
+     */
+    public function findById($id)
+    {
+        /** @var Product $product */
+        $product = $this->productRepository->findOneBy(
+            array(
+                'id' => $id,
+            )
+        );
+        $tags = $this->entityManager
+            ->createQueryBuilder()
+
+            ->select('t')
+            ->from('PHPTestBundle:Tag', 't')
+
+            ->innerJoin('t.tagging', 't2', Expr\Join::WITH, 't2.resourceId = :id AND t2.resourceType = :type')
+            ->setParameter('id', $product->getTaggableId())
+            ->setParameter('type', $product->getTaggableType())
+
+            // ->orderBy('t.name', 'ASC')
+
+            ->getQuery()
+            ->getResult()
+        ;
+        $product->setTagsAsString(implode(', ', $tags));
+
+        return $product;
+    }
+
+    /**
+     * Return product name by id.
+     *
+     * @param $id
+     *
      * @return string
      */
     public function getProductNameById($id)
@@ -114,6 +151,7 @@ class ProductService
                 'id' => $id,
             )
         );
+
         return $product->getName();
     }
 }

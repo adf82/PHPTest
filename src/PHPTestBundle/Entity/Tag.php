@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Tag.
  *
  * @ORM\Table(name="tag")
- * @ORM\Entity(repositoryClass="\DoctrineExtensions\Taggable\Entity\TagRepository")
+ * @ORM\Entity(repositoryClass="PHPTestBundle\Repository\TagRepository")
  */
 class Tag extends BaseTag
 {

@@ -11,9 +11,10 @@ namespace PHPTestBundle\Repository;
 class TagRepository extends \DoctrineExtensions\Taggable\Entity\TagRepository
 {
     /**
-     * Find tags using LIKE
+     * Find tags using LIKE.
      *
      * @param $query
+     *
      * @return mixed
      */
     public function findTagsUsingLike($query)

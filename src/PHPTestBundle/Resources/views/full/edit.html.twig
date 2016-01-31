@@ -1,0 +1,19 @@
+{% extends "PHPTestBundle::layout.html.twig" %}
+
+{% block main_content %}
+
+    <div class="row">
+        <div class="columns small-1 small-push-11">
+            <a href="/">
+                <i class="fa fa-arrow-circle-left"></i> index
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-10 columns">
+            <h1>Product <i>{{ name }}</i> edit</h1>
+        </div>
+    </div>
+
+    {% include "PHPTestBundle:parts:product_form.html.twig" with {'form': form} %}
+{% endblock %}

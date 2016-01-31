@@ -9,3 +9,9 @@ php_test_product_create:
 php_test_product_list:
     path:     /product/list
     defaults: { _controller: PHPTestBundle:Product:list }
+
+php_test_product_edit:
+    path:     /product/{id}/edit
+    defaults: { _controller: PHPTestBundle:Product:edit }
+    requirements:
+        id:  \d+

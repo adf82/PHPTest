@@ -8,8 +8,8 @@
 namespace PHPTestBundle\Service;
 
 use Doctrine\ORM\EntityManager;
-use DoctrineExtensions\Taggable\Entity\TagRepository;
 use DoctrineExtensions\Taggable\TagManager;
+use PHPTestBundle\Entity\Product;
 use PHPTestBundle\Repository\ProductRepository;
 
 /**
@@ -33,7 +33,7 @@ class ProductService
     private $productRepository;
 
     /**
-     * @var TagRepository
+     * @var \PHPTestBundle\Repository\TagRepository
      */
     private $tagRepository;
 
@@ -90,16 +90,7 @@ class ProductService
      */
     public function findAllByTag($query)
     {
-        $results = $this->tagRepository->createQueryBuilder('tag')
-            ->select('tagging.resourceId')
-            ->join('tag.tagging', 'tagging')
-            ->where('tagging.resourceType = :resourceType')
-            ->andwhere('tag.name LIKE :query')
-            ->setParameter('query', '%'.$query.'%')
-            ->setParameter('resourceType', 'tag')
-            ->getQuery()
-            ->execute()
-        ;
+        $results = $this->tagRepository->findTagsUsingLike($query);
 
         $ids = array();
         foreach ($results as $result) {
@@ -107,5 +98,22 @@ class ProductService
         }
 
         return $this->productRepository->findByIds($ids);
+    }
+
+    /**
+     * Return product name by id
+     *
+     * @param $id
+     * @return string
+     */
+    public function getProductNameById($id)
+    {
+        /** @var Product $product */
+        $product = $this->productRepository->findOneBy(
+            array(
+                'id' => $id,
+            )
+        );
+        return $product->getName();
     }
 }

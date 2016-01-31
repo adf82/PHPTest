@@ -18,5 +18,5 @@ php-cs-fixer.phar
 /vendor/
 /web/bundles/
 
-/web/images/*
+/web/cache/*
 /web/images/*

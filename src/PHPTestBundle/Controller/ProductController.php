@@ -11,8 +11,18 @@ use PHPTestBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class ProductController
+ * @package PHPTestBundle\Controller
+ */
 class ProductController extends Controller
 {
+    /**
+     * Product create controller
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -45,6 +55,19 @@ class ProductController extends Controller
                 'success' => isset($success) ? true : false,
                 'form' => $form->createView(),
             )
+        );
+    }
+
+    public function listAction(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository('PHPTestBundle:Product');
+        $products = $repository->findAll();
+
+        return $this->render(
+            'PHPTestBundle:full:list.html.twig',
+            array(
+                'products' => $products
+             )
         );
     }
 }

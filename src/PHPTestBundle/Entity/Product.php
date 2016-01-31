@@ -40,7 +40,7 @@ class Product implements Taggable
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image_name", type="string", length=255, nullable=true)
      */
     private $imageName;
 

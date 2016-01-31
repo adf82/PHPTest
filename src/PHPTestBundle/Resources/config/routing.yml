@@ -5,3 +5,7 @@ php_test_homepage:
 php_test_product_create:
     path:     /product/create
     defaults: { _controller: PHPTestBundle:Product:create }
+
+php_test_product_list:
+    path:     /product/list
+    defaults: { _controller: PHPTestBundle:Product:list }

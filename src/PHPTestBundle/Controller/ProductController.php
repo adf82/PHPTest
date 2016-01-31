@@ -11,10 +11,6 @@ namespace PHPTestBundle\Controller;
 
 use PHPTestBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller
@@ -24,47 +20,10 @@ class ProductController extends Controller
         $tagManager = $this->get('fpn_tag.tag_manager');
 
         $product = new Product();
-
-        $form = $this->createFormBuilder($product)
-            ->add(
-                'name',
-                TextType::class
-            )
-            ->add(
-                'imageFile',
-                FileType::class,
-                array(
-                    'label' => 'Select an image',
-                    'required' => false
-                )
-            )
-            ->add(
-                'description',
-                TextareaType::class,
-                array(
-                    'required' => false
-                )
-            )
-            ->add(
-                'tags',
-                TextType::class,
-                array(
-                    'label' => "Tags (Please use the comma to separate tags)",
-                    'required' => true
-                )
-            )
-            ->add(
-                'save',
-                SubmitType::class,
-                array(
-                    'label' => 'Add'
-                )
-            )
-            ->getForm();
+        $form = $this->createForm('PHPTestBundle\Form\ProductType', $product);
 
         $form->handleRequest($request);
 
-        //TODO: custom check on tags
         $tags = $form->get('tags')->getData();
         $tags = !is_null($tags) ? explode(',', $tags) : null;
 

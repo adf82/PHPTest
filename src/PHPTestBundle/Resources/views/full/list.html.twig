@@ -3,7 +3,7 @@
 {% block main_content %}
 
     <div class="row">
-        <div class="columns small-1 small-push-11">
+        <div class="columns small-2 small-push-10 text-right">
             <a href="/">
                 <i class="fa fa-arrow-circle-left"></i> index
             </a>
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="columns small-12 medium-3">
-            <h3>Search</h3>
+            <h3>Tag Search</h3>
             {% if app.request.get('query') is not null %}
                 <div class="row">
                     <div class="columns small-12">

@@ -21,7 +21,7 @@
                     <div class="column">
                         <a href="/product/{{ product.id }}/edit" title="Edit {{ product.name }}">
                             {% if product.imageName is not null %}
-                                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="thumbnail" alt="{{ product.name }}">
+                                <img src="{{ vich_uploader_asset(product, 'imageFile') | imagine_filter('product_thumb')  }}" class="thumbnail" alt="{{ product.name }}">
                             {% endif %}
                             <h4>{{ product.name }}</h4>
                         </a>

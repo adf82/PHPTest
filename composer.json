@@ -28,7 +28,8 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "fpn/tag-bundle": "^0.9.0",
-        "vich/uploader-bundle": "1.0.0-beta7"
+        "vich/uploader-bundle": "1.0.0-beta7",
+        "liip/imagine-bundle": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

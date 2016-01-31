@@ -80,3 +80,18 @@ vich_uploader:
         product_image:
             uri_prefix:         /images
             upload_destination: %kernel.root_dir%/../web/images
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path:
+                cache_prefix: cache
+
+    driver: gd
+    filter_sets:
+        cache: ~
+        product_thumb:
+            quality: 75
+            filters:
+                strip: ~
+                thumbnail: { size: [120, 90], mode: outbound }

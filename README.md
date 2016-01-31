@@ -17,6 +17,6 @@
 
 * `Composer` has been included into the repository for sake of semplicity (not a good pratice actually)
 * For a better experience a pagination in `/product/list` should have been implemented, I decided to avoid it for time constraint. Pagination can be implemented using `Pagerfanta`
-* A `ProductService` has been built to better support the search logic, avoiding the injection of the TaggingRepository into the ProductRepository (This has been considered as a bad practice)
-* I didn't add any controll on 4xx and 5xx errors (default pages will be served)
+* A `ProductService` has been built to better support the search logic, avoiding the injection of the TaggingRepository into the ProductRepository (This has been considered as a bad practice) and keep business login out of the controller
+* I didn't add any control on 4xx and 5xx errors (default pages will be served)
  

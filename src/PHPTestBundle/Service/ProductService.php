@@ -71,10 +71,11 @@ class ProductService
     }
 
     /**
-     * Add a new product
+     * Add a new product.
      *
      * @param Product $product
      * @param $tags
+     *
      * @return Product
      */
     public function addProduct(Product $product, $tags)
@@ -83,15 +84,17 @@ class ProductService
     }
 
     /**
-     * Edit a product
+     * Update a product.
      *
      * @param Product $product
      * @param $tags
+     *
      * @return Product
      */
-    public function editProduct(Product $product, $tags)
+    public function updateProduct(Product $product, $tags)
     {
         $product->removeTags();
+
         return $this->persistProduct($product, $tags);
     }
 
@@ -178,6 +181,13 @@ class ProductService
         return $product->getName();
     }
 
+    /**
+     * Persist product (Add or update)
+     *
+     * @param Product $product
+     * @param $tags
+     * @return Product
+     */
     private function persistProduct(Product $product, $tags)
     {
         $tags = $this->tagManager->splitTagNames($tags);
@@ -190,6 +200,7 @@ class ProductService
         $this->entityManager->flush();
 
         $this->tagManager->saveTagging($product);
+
         return $product;
     }
 }

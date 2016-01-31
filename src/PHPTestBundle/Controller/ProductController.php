@@ -9,7 +9,6 @@ namespace PHPTestBundle\Controller;
 
 use FPN\TagBundle\Entity\TagManager;
 use PHPTestBundle\Entity\Product;
-use PHPTestBundle\Repository\ProductRepository;
 use PHPTestBundle\Service\ProductService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,12 +41,11 @@ class ProductController extends Controller
 
         if ($form->isSubmitted() && $form->isValid() && count($tags) > 0) {
             $productService->addProduct($product, $tags);
-            if($product instanceof Product){
+            if ($product instanceof Product) {
                 return $this->redirectToRoute('php_test_product_list');
-            }else{
-                throw new \Exception("Error creating product");
+            } else {
+                throw new \Exception('Error creating product');
             }
-
         }
 
         return $this->render(
@@ -110,14 +108,13 @@ class ProductController extends Controller
 
         $tags = $form->get('tags')->getData();
 
-
         if ($form->isSubmitted() && $form->isValid() && count($tags) > 0) {
-            $productService->editProduct($product, $tags);
+            $productService->updateProduct($product, $tags);
 
-            if($product instanceof Product){
+            if ($product instanceof Product) {
                 return $this->redirectToRoute('php_test_product_list');
-            }else{
-                throw new \Exception("Error updating product with id ".$id);
+            } else {
+                throw new \Exception('Error updating product with id '.$id);
             }
         }
 

@@ -14,14 +14,7 @@
             <h1>Create a new product</h1>
         </div>
     </div>
-    {% if success %}
-        <div class="row">
-            <div class="small-12 columns">
-                <h2><i class="fa fa-plus-square-o"></i> Product added</h2>
-            </div>
-        </div>
-    {% else %}
-        {% include "PHPTestBundle:parts:product_form.html.twig" with {'form': form} %}
-    {% endif %}
 
+    {% include "PHPTestBundle:parts:product_form.html.twig" with {'form': form} %}
+    
 {% endblock %}
